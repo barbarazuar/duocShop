@@ -1,6 +1,7 @@
 package com.duocshop.duocshop.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,5 +70,14 @@ public class UsuarioCalificacionController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+    
+    @GetMapping("/resumen")
+    public ResponseEntity<List<Map<String, Object>>> resumen() {
+        List<Map<String, Object>> resumen = usuarioCalificacionService.obtenerUsuarioCalificacion();
+        if (resumen.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(resumen);
     }
 }
